@@ -390,3 +390,71 @@ sudo touch /userdata/.adb_onlock
 ```
 
 Esta guía abarca todos los pasos principales para iniciar el desarrollo de un port de Ubuntu Touch para el Redmi Note 10S. Ten en cuenta que el proceso puede requerir ajustes específicos según las particularidades de tu dispositivo y la versión exacta del firmware. El desarrollo de un port es un proceso iterativo que puede requerir varias semanas o meses de trabajo, especialmente para dispositivos con chipsets MediaTek que suelen tener menos soporte en la comunidad de desarrollo.
+
+MÁS CONTENIDO 
+
+# Guía para portar Ubuntu Touch
+
+## Requisitos previos
+
+1. **Conocimientos técnicos**: Debes tener experiencia en desarrollo de software y conocimientos sobre sistemas operativos móviles.
+2. **Herramientas necesarias**:
+   - Un ordenador con Ubuntu instalado.
+   - Un dispositivo compatible (consulta la lista de dispositivos compatibles en la [página oficial de Ubuntu Touch](https://ubuntu-touch.io/devices)).
+
+## Pasos para portar Ubuntu Touch
+
+### 1. Configurar el entorno de desarrollo
+
+1. **Instalar las herramientas necesarias**:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install git phablet-tools
+   ```
+
+2. **Clonar el repositorio de Ubuntu Touch**:
+   ```bash
+   git clone https://github.com/ubports/ubuntu-touch.git
+   cd ubuntu-touch
+   ```
+
+### 2. Preparar el dispositivo
+
+1. **Desbloquear el bootloader**: Sigue las instrucciones específicas para tu dispositivo para desbloquear el bootloader.
+2. **Instalar un recovery personalizado**: Generalmente se utiliza TWRP (Team Win Recovery Project).
+
+### 3. Compilar Ubuntu Touch
+
+1. **Configurar el entorno de compilación**:
+   ```bash
+   source build/envsetup.sh
+   lunch
+   ```
+
+2. **Compilar el sistema**:
+   ```bash
+   make -j$(nproc)
+   ```
+
+### 4. Instalar Ubuntu Touch en el dispositivo
+
+1. **Reiniciar el dispositivo en modo recovery**:
+   ```bash
+   adb reboot recovery
+   ```
+
+2. **Flashear la imagen compilada**:
+   ```bash
+   adb sideload path_to_ubuntu_touch_image.zip
+   ```
+
+### 5. Post-instalación
+
+1. **Reiniciar el dispositivo** y verificar que Ubuntu Touch se ha instalado correctamente.
+
+## Recursos adicionales
+
+- [Documentación oficial de UBports](https://docs.ubports.com/)
+- [Foros de soporte de UBports](https://forums.ubports.com/)
+
+Recuerda que este es un proceso general y puede variar según el dispositivo específico que estés utilizando. Consulta la documentación y los recursos específicos para tu dispositivo para obtener instrucciones detalladas.
